@@ -32,7 +32,7 @@ export default class Main extends Component {
     });
   };
   render() {
-    const { newRepo, loading } = this.state;
+    const { newRepo, repositories, loading } = this.state;
 
     return (
       <Container>
@@ -57,6 +57,14 @@ export default class Main extends Component {
             )}
           </SubmitButton>
         </Form>
+        <List>
+          {repositories.map(repository => (
+            <li key={repository.name}>
+              <span>{repository.name}</span>
+              <a href="">Detalhes</a>
+            </li>
+          ))}
+        </List>
       </Container>
     );
   }
