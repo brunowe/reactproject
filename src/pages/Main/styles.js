@@ -1,6 +1,6 @@
 import styled, { keyframes, css } from 'styled-components';
 
-export const Container = styled.h1`
+export const Container = styled.div`
   max-width: 700px;
   background-color: #fff;
   border-radius: 4px;
