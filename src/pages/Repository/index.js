@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import Proptypes from 'prop-types';
+import PropTypes from 'prop-types';
 import api from '../../services/api';
+
+import Container from '../../components/Container';
+import { Loading } from './styles';
 
 // import { Container } from './styles';
 
 export default class Repository extends Component {
-  static proptypes = {
+  static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.shape({
         repository: PropTypes.string,
@@ -13,9 +16,9 @@ export default class Repository extends Component {
     }).isRequired,
   };
   state = {
-    Repository: {},
+    repository: {},
     issues: [],
-    loading: true,
+    loading: false,
   };
 
   async componentDidMount() {
@@ -42,7 +45,10 @@ export default class Repository extends Component {
 
   render() {
     const { repository, issues, loading } = this.state;
-
-    return <h1>Repository</h1>;
+    console.log(loading);
+    if (loading) {
+      return <Loading>Carregando</Loading>;
+    }
+    return <Container>Repository</Container>;
   }
 }
