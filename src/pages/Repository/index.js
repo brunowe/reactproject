@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import api from '../../services/api';
 
 import Container from '../../components/Container';
-import { Loading } from './styles';
+import { Loading, Owner } from './styles';
 
 // import { Container } from './styles';
 
-export default class Repository extends Component {
+class Repository extends Component {
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.shape({
@@ -18,13 +18,13 @@ export default class Repository extends Component {
   state = {
     repository: {},
     issues: [],
-    loading: false,
+    loading: true,
   };
 
   async componentDidMount() {
     const { match } = this.props;
 
-    const repoName = decodeURIComponent(match.params.Repository);
+    const repoName = decodeURIComponent(match.params.repository);
 
     const [repository, issues] = await Promise.all([
       api.get(`/repos/${repoName}`),
@@ -49,6 +49,15 @@ export default class Repository extends Component {
     if (loading) {
       return <Loading>Carregando</Loading>;
     }
-    return <Container>Repository</Container>;
+    return (
+      <Container>
+        <Owner>
+          <img src={repository.owner.avatar_url} alt={repository.owner.login} />
+          <h1>{repository.name}</h1>
+          <p>{repository.description}</p>
+        </Owner>
+      </Container>
+    );
   }
 }
+export default Repository;
