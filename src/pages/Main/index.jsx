@@ -10,10 +10,10 @@ export default class Main extends Component {
     repositories: [],
     loading: false,
   };
-  handleInputChange = e => {
+  handleInputChange = (e) => {
     this.setState({ newRepo: e.target.value });
   };
-  handleSubmit = async e => {
+  handleSubmit = async (e) => {
     e.preventDefault();
 
     this.setState({ loading: true });
@@ -58,7 +58,7 @@ export default class Main extends Component {
           </SubmitButton>
         </Form>
         <List>
-          {repositories.map(repository => (
+          {repositories.map((repository) => (
             <li key={repository.name}>
               <span>{repository.name}</span>
               <a href="">Detalhes</a>
